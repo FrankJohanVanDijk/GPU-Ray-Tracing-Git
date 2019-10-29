@@ -265,7 +265,7 @@ RayHit Trace(Ray ray)
 	_MeshObjects.GetDimensions(count, stride);
 	for (i = 0; i < count; i++)
 	{
-		IntersectMeshObject(ray, bestHit, _MeshObjects[i]);
+		//IntersectMeshObject(ray, bestHit, _MeshObjects[i]);
 	}
 
 	return bestHit;
