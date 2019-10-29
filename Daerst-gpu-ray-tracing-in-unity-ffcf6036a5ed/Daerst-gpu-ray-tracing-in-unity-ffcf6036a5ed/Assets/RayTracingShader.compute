@@ -248,7 +248,7 @@ void IntersectMeshObject(Ray ray, inout RayHit bestHit, MeshObject meshObject)
 //-------------------------------------
 //- TRACE
 
-RayHit Trace(Ray ray)
+RayHit Trace(Ray ray, uint3 pixelPos)
 {
 	RayHit bestHit = CreateRayHit();
 	uint count, stride, i;
@@ -380,7 +380,7 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     float3 result = float3(0, 0, 0);
     for (int i = 0; i < 8; i++)
     {
-        RayHit hit = Trace(ray);
+        RayHit hit = Trace(ray, id);
         result += ray.energy * Shade(ray, hit);
 
         if (!any(ray.energy))
