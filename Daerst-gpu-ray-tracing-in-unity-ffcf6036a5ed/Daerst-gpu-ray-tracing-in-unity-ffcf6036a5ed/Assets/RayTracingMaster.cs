@@ -182,6 +182,19 @@ public class RayTracingMaster : MonoBehaviour
         {
             Mesh mesh = obj.GetComponent<MeshFilter>().sharedMesh;
 
+            Vector2 screenPoint = _camera.WorldToScreenPoint(obj.transform.position);
+
+            float bestRadius = 0.0f;
+            for(int i = 0; i < mesh.vertexCount; i++)
+            {
+                Vector2 vertexScreenPoint = _camera.WorldToScreenPoint(mesh.vertices[i] + new Vector3(screenPoint.x, screenPoint.y));
+                float currentRadius = Mathf.Sqrt(Mathf.Pow(vertexScreenPoint.x - screenPoint.x, 2) + Mathf.Pow(vertexScreenPoint.y - screenPoint.y, 2));
+                if(currentRadius > bestRadius)
+                {
+                    bestRadius = currentRadius;
+                }
+            }
+
             // Add vertex data
             int firstVertex = _vertices.Count;
             _vertices.AddRange(mesh.vertices);
@@ -198,8 +211,8 @@ public class RayTracingMaster : MonoBehaviour
                 localToWorldMatrix = obj.transform.localToWorldMatrix,
                 indices_offset = firstIndex,
                 indices_count = indices.Length,
-                pivotScreenPoint = new Vector2(0, 0),
-                radius = 5.5f
+                pivotScreenPoint = screenPoint,
+                radius = bestRadius
             });
         }
 
