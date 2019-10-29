@@ -36,6 +36,8 @@ public class RayTracingMaster : MonoBehaviour
         public Matrix4x4 localToWorldMatrix;
         public int indices_offset;
         public int indices_count;
+        public Vector2 pivotScreenPoint;
+        public float radius;
     }
 
     struct Sphere
@@ -195,11 +197,13 @@ public class RayTracingMaster : MonoBehaviour
             {
                 localToWorldMatrix = obj.transform.localToWorldMatrix,
                 indices_offset = firstIndex,
-                indices_count = indices.Length
+                indices_count = indices.Length,
+                pivotScreenPoint = new Vector2(0, 0),
+                radius = 5.5f
             });
         }
 
-        CreateComputeBuffer(ref _meshObjectBuffer, _meshObjects, 72);
+        CreateComputeBuffer(ref _meshObjectBuffer, _meshObjects, 84);
         CreateComputeBuffer(ref _vertexBuffer, _vertices, 12);
         CreateComputeBuffer(ref _indexBuffer, _indices, 4);
     }
