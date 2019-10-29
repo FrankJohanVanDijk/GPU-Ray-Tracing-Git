@@ -191,7 +191,7 @@ public class RayTracingMaster : MonoBehaviour
                 float currentRadius = Mathf.Sqrt(Mathf.Pow(vertexScreenPoint.x - screenPoint.x, 2) + Mathf.Pow(vertexScreenPoint.y - screenPoint.y, 2));
                 if(currentRadius > bestRadius)
                 {
-                    bestRadius = currentRadius;
+                   bestRadius = currentRadius;
                 }
             }
 

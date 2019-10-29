@@ -267,7 +267,11 @@ RayHit Trace(Ray ray, uint3 pixelPos)
 	_MeshObjects.GetDimensions(count, stride);
 	for (i = 0; i < count; i++)
 	{
-		IntersectMeshObject(ray, bestHit, _MeshObjects[i]);
+		float pixelDistance = sqrt(pow(pixelPos.x - _MeshObjects[i].pivotScreenPoint.x, 2) + pow(pixelPos.y - _MeshObjects[i].pivotScreenPoint.y, 2));
+		if (pixelDistance < _MeshObjects[i].radius)
+		{
+			IntersectMeshObject(ray, bestHit, _MeshObjects[i]);
+		}
 	}
 
 	return bestHit;
