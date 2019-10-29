@@ -74,7 +74,7 @@ public class RayTracingMaster : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F12))
         {
-            ScreenCapture.CaptureScreenshot(Time.time + "-" + _currentSample + ".png");
+           // ScreenCapture.CaptureScreenshot(Time.time + "-" + _currentSample + ".png");
         }
 
         if (_camera.fieldOfView != _lastFieldOfView)
